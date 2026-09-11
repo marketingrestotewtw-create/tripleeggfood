@@ -1,0 +1,2 @@
+import { readFile } from 'node:fs/promises';
+for(const file of ['src/site.js','src/data.js']){const source=await readFile(file,'utf8');if(/\bvar\b/.test(source))throw new Error(`${file}: use const or let`);if(/console\.log/.test(source))throw new Error(`${file}: console.log is not allowed`);}console.log('Lint checks passed');

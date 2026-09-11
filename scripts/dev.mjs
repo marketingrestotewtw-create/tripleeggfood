@@ -1,0 +1,3 @@
+import http from 'node:http'; import { readFile, stat } from 'node:fs/promises'; import { extname, join } from 'node:path';
+const types={'.html':'text/html','.js':'text/javascript','.css':'text/css','.svg':'image/svg+xml'};
+http.createServer(async(req,res)=>{try{let path=req.url.split('?')[0];if(path==='/')path='/index.html';const file=join(process.cwd(),path.startsWith('/public/')?path.slice(7):path);await stat(file);res.setHeader('content-type',types[extname(file)]||'application/octet-stream');res.end(await readFile(file));}catch{res.statusCode=404;res.end('Not found');}}).listen(4173,()=>console.log('Triple Egg: http://localhost:4173'));
