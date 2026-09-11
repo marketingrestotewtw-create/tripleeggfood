@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#1f4f2b" />
+    <title>Join With Us Leads | Triple Egg</title>
+    <link rel="stylesheet" href="/join-admin/admin.css" />
+  </head>
+  <body>
+    <main class="admin-shell">
+      <header><p>TRIPLE EGG</p><h1>Join With Us — Leads</h1></header>
+      <section class="login-panel" aria-labelledby="login-title">
+        <h2 id="login-title">Admin Password</h2>
+        <form class="login-form"><label for="password">Admin Password</label><input id="password" name="password" type="password" autocomplete="current-password" required><p class="message" role="alert"></p><button type="submit">Login</button></form>
+      </section>
+      <section class="leads-panel" hidden aria-labelledby="leads-count">
+        <div class="toolbar"><h2 id="leads-count">Total Leads: 0</h2><div><button class="refresh" type="button">Refresh</button><button class="export" type="button">Export CSV</button></div></div>
+        <p class="leads-message message" role="alert" aria-live="polite"></p>
+        <div class="table-wrap"><table><thead><tr><th>Nama</th><th>No. HP</th><th>Tanggal Lahir</th><th>Submitted At</th></tr></thead><tbody></tbody></table></div>
+      </section>
+    </main>
+    <script type="module" src="/join-admin/admin.js"></script>
+  </body>
+</html>

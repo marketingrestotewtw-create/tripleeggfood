@@ -1,8 +1,6 @@
 import { menuItems, location, claims } from './data.js';
 
 const instagram = 'https://www.instagram.com/tripleeggfood/';
-const supabaseUrl = '__SUPABASE_URL__';
-const supabaseAnonKey = '__SUPABASE_ANON_KEY__';
 const nav = [
   ['Home', '#home'], ['About', '#about'], ['Menu', '#menu'],
   ['Location', '#location'], ['Contact', '#contact'],
@@ -128,10 +126,9 @@ joinForm.addEventListener('submit', async event => {
   joinSubmit.disabled = true;
   joinSubmit.textContent = 'Submitting…';
   try {
-    if (!supabaseUrl || !supabaseAnonKey || supabaseUrl.startsWith('__') || supabaseAnonKey.startsWith('__')) throw new Error('Missing public configuration');
-    const response = await fetch(`${supabaseUrl.replace(/\/$/, '')}/rest/v1/join_with_us_leads`, {
+    const response = await fetch('/api/join-with-us', {
       method: 'POST',
-      headers: { apikey: supabaseAnonKey, Authorization: `Bearer ${supabaseAnonKey}`, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, phone, birth_date: selectedBirthDate }),
     });
     if (!response.ok) throw new Error('Submission failed');

@@ -9,10 +9,3 @@ create table public.join_with_us_leads (
 alter table public.join_with_us_leads enable row level security;
 
 revoke all on table public.join_with_us_leads from anon, authenticated;
-grant insert on table public.join_with_us_leads to anon, authenticated;
-
-create policy "public can submit join leads"
-on public.join_with_us_leads
-for insert
-to anon, authenticated
-with check (true);

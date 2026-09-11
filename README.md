@@ -29,14 +29,16 @@ accidentally look production-ready.
 
 ## Join With Us lead storage
 
-The homepage form writes leads to the Supabase `join_with_us_leads` table. Apply
+The homepage form posts to the server-only `/api/join-with-us` endpoint, which
+writes leads to the Supabase `join_with_us_leads` table. Apply
 `supabase/migrations/20260911000000_create_join_with_us_leads.sql` to the
-production Supabase project, then configure these build-time environment
-variables in the hosting provider:
+production Supabase project, then configure these Vercel environment variables:
 
-- `SUPABASE_URL`: the project's public API URL
-- `SUPABASE_ANON_KEY`: the project's public anon/publishable key (never use a
-  service-role key)
+- `SUPABASE_URL`: the project's API URL
+- `SUPABASE_SERVICE_ROLE_KEY`: the project's service-role key
+- `JOIN_ADMIN_PASSWORD`: a strong password for the private `/join-admin/` page
 
-The migration enables row-level security and grants public clients insert-only
-access. Public clients cannot select, update, or delete collected leads.
+All three values are server-only. They are read by the Vercel functions and are
+never copied into `dist/` or sent to the browser. The migration enables
+row-level security; lead reads are only performed server-side after validating
+the signed, HttpOnly admin session cookie.

@@ -1,18 +1,10 @@
-import { access, cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { access, cp, mkdir, rm } from 'node:fs/promises';
 await rm('dist', { recursive: true, force: true });
 await mkdir('dist/src', { recursive: true });
 await cp('index.html', 'dist/index.html');
 await cp('src', 'dist/src', { recursive: true });
-
-const publicConfig = {
-  '__SUPABASE_URL__': process.env.SUPABASE_URL || '',
-  '__SUPABASE_ANON_KEY__': process.env.SUPABASE_ANON_KEY || '',
-};
-let siteSource = await readFile('dist/src/site.js', 'utf8');
-for (const [placeholder, value] of Object.entries(publicConfig)) {
-  siteSource = siteSource.replaceAll(placeholder, value);
-}
-await writeFile('dist/src/site.js', siteSource);
+await mkdir('dist/join-admin', { recursive: true });
+await cp('join-admin', 'dist/join-admin', { recursive: true });
 
 // Publish the approved source menu under a stable, web-friendly URL while
 // keeping the original PDF unchanged at the repository root.
