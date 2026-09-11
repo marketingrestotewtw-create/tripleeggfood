@@ -3,6 +3,8 @@ await rm('dist', { recursive: true, force: true });
 await mkdir('dist/src', { recursive: true });
 await cp('index.html', 'dist/index.html');
 await cp('src', 'dist/src', { recursive: true });
+await mkdir('dist/join-admin', { recursive: true });
+await cp('join-admin', 'dist/join-admin', { recursive: true });
 
 // Publish the approved source menu under a stable, web-friendly URL while
 // keeping the original PDF unchanged at the repository root.

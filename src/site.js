@@ -28,7 +28,7 @@ function Hero() {
   return `<section class="hero" id="home">
     <div class="hero-copy reveal"><p class="eyebrow">Healthy food · Bali</p><h1>Good food.<br><em>Full strength.</em></h1>
       <p class="hero-lede">Nutritious, delicious dishes for the way you want to live—made by Triple Egg inside OBSIDIAN Gym.</p>
-      <div class="actions"><a class="button button--light" href="#menu">View menu <span>↓</span></a><a class="text-link" href="#location">Find us <span>↘</span></a></div>
+      <div class="actions"><a class="button button--light" href="#menu">View menu <span>↓</span></a><a class="text-link" href="#location">Find us <span>↘</span></a><button class="text-link join-trigger" type="button">Join with us <span>↗</span></button></div>
     </div>
     <div class="hero-visual reveal">${eggArt()}<p class="stamp">TRIPLE<br>THE<br>GOOD</p></div>
     <p class="hero-side" aria-hidden="true">NUTRITIOUS / DELICIOUS / COOKED TO ORDER</p>
@@ -53,12 +53,94 @@ function Contact() { return `<section class="contact" id="contact"><p class="eye
 
 function Footer() { return `<footer>${Brand({light:true})}<div class="footer-nav">${nav.map(([l,h]) => `<a href="${h}">${l}</a>`).join('')}</div><div><a href="${instagram}" target="_blank" rel="noreferrer">Instagram ↗</a><p>© ${new Date().getFullYear()} Triple Egg</p></div></footer>`; }
 
-document.querySelector('#app').innerHTML = `${Navbar()}<main>${Hero()}${Marquee()}${About()}${Menu()}${Location()}${Contact()}</main>${Footer()}`;
+function JoinDialog() { return `<dialog class="join-dialog" aria-labelledby="join-title">
+  <div class="join-dialog__inner">
+    <button class="join-dialog__close" type="button" aria-label="Close Join With Us form">×</button>
+    <div class="join-dialog__content">
+      <p class="eyebrow">Triple Egg</p><h2 id="join-title">Join With Us</h2>
+      <p class="join-dialog__intro">Leave your details below and we'll get to know you first.</p>
+      <form class="join-form" novalidate>
+        <label>Nama<input name="name" type="text" placeholder="Nama lengkap" autocomplete="name" required></label>
+        <label>No. HP<input name="phone" type="tel" placeholder="08xxxxxxxxxx" autocomplete="tel" inputmode="tel" required></label>
+        <label>Tanggal Lahir<input name="birthDate" type="date" autocomplete="bday" required></label>
+        <p class="form-message" role="alert" aria-live="polite"></p>
+        <button class="button join-form__submit" type="submit">Submit</button>
+      </form>
+      <div class="join-success" aria-live="polite" hidden><h3>Thank you! ✨</h3><p>Your details have been submitted.</p></div>
+    </div>
+  </div>
+</dialog>`; }
+
+document.querySelector('#app').innerHTML = `${Navbar()}<main>${Hero()}${Marquee()}${About()}${Menu()}${Location()}${Contact()}</main>${Footer()}${JoinDialog()}`;
 
 const toggle = document.querySelector('.menu-toggle');
 const mobileMenu = document.querySelector('.mobile-nav');
 toggle.addEventListener('click', () => { const open = toggle.getAttribute('aria-expanded') === 'true'; toggle.setAttribute('aria-expanded', String(!open)); toggle.setAttribute('aria-label', open ? 'Open menu' : 'Close menu'); mobileMenu.classList.toggle('is-open'); document.body.classList.toggle('menu-open'); });
 mobileMenu.addEventListener('click', e => { if (e.target.matches('a')) { toggle.setAttribute('aria-expanded', 'false'); mobileMenu.classList.remove('is-open'); document.body.classList.remove('menu-open'); } });
+
+const joinDialog = document.querySelector('.join-dialog');
+const joinForm = document.querySelector('.join-form');
+const joinMessage = document.querySelector('.form-message');
+const joinSubmit = document.querySelector('.join-form__submit');
+const joinSuccess = document.querySelector('.join-success');
+const birthDate = joinForm.elements.birthDate;
+
+function todayForDateInput() {
+  const now = new Date();
+  return new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+}
+
+function resetJoinDialog() {
+  joinForm.reset();
+  joinForm.hidden = false;
+  joinSuccess.hidden = true;
+  joinMessage.textContent = '';
+  joinSubmit.disabled = false;
+  joinSubmit.textContent = 'Submit';
+}
+
+birthDate.max = todayForDateInput();
+document.querySelector('.join-trigger').addEventListener('click', () => joinDialog.showModal());
+document.querySelector('.join-dialog__close').addEventListener('click', () => joinDialog.close());
+joinDialog.addEventListener('click', event => { if (event.target === joinDialog) joinDialog.close(); });
+joinDialog.addEventListener('close', resetJoinDialog);
+
+function normalizedIndonesianPhone(value) {
+  const compact = value.trim().replace(/[\s().-]/g, '');
+  const normalized = compact.startsWith('08') ? `+62${compact.slice(1)}` : compact;
+  return /^\+628\d{7,11}$/.test(normalized) ? normalized : null;
+}
+
+joinForm.addEventListener('submit', async event => {
+  event.preventDefault();
+  if (joinSubmit.disabled) return;
+  const name = joinForm.elements.name.value.trim();
+  const phone = normalizedIndonesianPhone(joinForm.elements.phone.value);
+  const selectedBirthDate = birthDate.value;
+  if (!name || !phone || !selectedBirthDate || selectedBirthDate > todayForDateInput()) {
+    joinMessage.textContent = 'Please complete all fields with valid details.';
+    return;
+  }
+
+  joinMessage.textContent = '';
+  joinSubmit.disabled = true;
+  joinSubmit.textContent = 'Submitting…';
+  try {
+    const response = await fetch('/api/join-with-us', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, phone, birth_date: selectedBirthDate }),
+    });
+    if (!response.ok) throw new Error('Submission failed');
+    joinForm.reset();
+    joinForm.hidden = true;
+    joinSuccess.hidden = false;
+  } catch {
+    joinMessage.textContent = 'Something went wrong. Please try again.';
+    joinSubmit.disabled = false;
+    joinSubmit.textContent = 'Submit';
+  }
+});
 
 if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
   const observer = new IntersectionObserver(entries => entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('in-view')), { threshold: .12 });
