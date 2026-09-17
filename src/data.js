@@ -25,10 +25,3 @@ export const location = {
   contact: '+62 811-9698-8802',
   contactUrl: 'https://wa.link/b1xf37',
 };
-
-export const claims = [
-  'Whole food ingredients',
-  'Cooked to order',
-  'Homemade sauce',
-  'No seed oil',
-];
