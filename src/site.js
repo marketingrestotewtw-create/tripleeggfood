@@ -1,4 +1,4 @@
-import { menuItems, location, claims } from './data.js';
+import { menuItems, location } from './data.js';
 
 const instagram = 'https://www.instagram.com/tripleeggfood/';
 const nav = [
@@ -41,7 +41,10 @@ function Hero() {
   </section>`;
 }
 
-function Marquee() { return `<div class="ticker" aria-label="Triple Egg food principles"><div>${[...claims, ...claims].map(c => `<span>${c}<i>●</i></span>`).join('')}</div></div>`; }
+function Marquee() {
+  const iconStrip = '<img src="/ticker-icons.png" alt="">'.repeat(6);
+  return `<div class="ticker" role="img" aria-label="Triple Egg character illustrations"><div class="ticker-track"><div class="ticker-group">${iconStrip}</div><div class="ticker-group" aria-hidden="true">${iconStrip}</div></div></div>`;
+}
 
 function About() {
   return `<section class="section about" id="about">
