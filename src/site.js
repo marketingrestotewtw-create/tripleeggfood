@@ -28,15 +28,13 @@ function Navbar() {
   </nav></header>`;
 }
 
-const eggArt = (className = '') => `<div class="egg-art ${className}" aria-hidden="true"><span class="egg-white"><i></i></span><span class="scribble">made fresh</span></div>`;
-
 function Hero() {
   return `<section class="hero" id="home">
     <div class="hero-copy reveal"><p class="eyebrow">Healthy food · Bali</p><h1><span class="hero-heading__intro">Real Ingredients.<br>Honest Cooking.</span><em>Built for Strength.</em></h1>
       <p class="hero-lede">Every dish is carefully sourced, cooked to order, and clearly labeled with macros, so you always know what you’re eating.</p>
       <div class="actions"><a class="button button--light" href="#menu">View menu <span>↓</span></a><a class="text-link" href="#location">Find us</a></div>
     </div>
-    <div class="hero-visual reveal">${eggArt()}<p class="stamp">TRIPLE<br>THE<br>GOOD</p></div>
+    <div class="hero-visual reveal"><img src="/home-photo.jpg" alt="Triple Egg healthy food" fetchpriority="high"></div>
     <p class="hero-side" aria-hidden="true">NUTRITIOUS / DELICIOUS / COOKED TO ORDER</p>
   </section>`;
 }
