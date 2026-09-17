@@ -38,9 +38,8 @@ function Hero() {
 function Marquee() { return `<div class="ticker" aria-label="Triple Egg food principles"><div>${[...claims, ...claims].map(c => `<span>${c}<i>●</i></span>`).join('')}</div></div>`; }
 
 function About() {
-  return `<section class="section about" id="about"><div class="section-kicker"><span>01</span><p>Our thing</p></div>
-    <div class="about-grid"><h2>Food that keeps<br>up with you.</h2><div><p class="large-copy">Triple Egg is a healthy lifestyle restaurant in Bali, serving food that balances real nourishment with real flavour.</p><p>Based inside OBSIDIAN Gym, we make straightforward, appetite-first food for training days, rest days, and every day in between.</p><a class="arrow-link" href="#principles">See our principles <span>↘</span></a></div></div>
-    <div class="principles" id="principles">${claims.map((claim, i) => `<article><span>0${i + 1}</span><h3>${claim}</h3><p class="review-note">Brand guideline claim · [REVIEW REQUIRED: confirm current operational accuracy]</p></article>`).join('')}</div>
+  return `<section class="section about" id="about">
+    <img class="about-principles-image" src="/about-principles.jpg" alt="Triple Egg ingredients and cooking principles">
   </section>`;
 }
 
