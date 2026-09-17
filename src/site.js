@@ -3,7 +3,7 @@ import { menuItems, location, claims } from './data.js';
 const instagram = 'https://www.instagram.com/tripleeggfood/';
 const nav = [
   ['Home', '#home'], ['About', '#about'], ['Menu', '#menu'],
-  ['Location', '#location'], ['Contact', '#contact'],
+  ['Location', '#location'],
 ];
 
 function Brand({ light = false } = {}) {
@@ -28,7 +28,7 @@ function Hero() {
   return `<section class="hero" id="home">
     <div class="hero-copy reveal"><p class="eyebrow">Healthy food · Bali</p><h1><span class="hero-heading__intro">Real Ingredients.<br>Honest Cooking.</span><em>Built for Strength.</em></h1>
       <p class="hero-lede">Every dish is carefully sourced, cooked to order, and clearly labeled with macros, so you always know what you’re eating.</p>
-      <div class="actions"><a class="button button--light" href="#menu">View menu <span>↓</span></a><a class="text-link" href="#location">Find us <span>↘</span></a><button class="text-link join-trigger" type="button">Join with us <span>↗</span></button></div>
+      <div class="actions"><a class="button button--light" href="#menu">View menu <span>↓</span></a><a class="text-link" href="#location">Find us</a></div>
     </div>
     <div class="hero-visual reveal">${eggArt()}<p class="stamp">TRIPLE<br>THE<br>GOOD</p></div>
     <p class="hero-side" aria-hidden="true">NUTRITIOUS / DELICIOUS / COOKED TO ORDER</p>
@@ -52,9 +52,7 @@ const menuImages = [
 function MenuCard(item, index) { return `<article class="menu-card"><div class="menu-image"><span>${item.number}</span><img src="${menuImages[index]}" alt="${item.name}" loading="lazy"></div><div class="menu-card-copy"><h3>${item.name}</h3>${item.description ? `<p class="menu-description">${item.description}</p>` : ''}<p class="menu-macros">${item.macros}</p></div></article>`; }
 function Menu() { return `<section class="section menu-section" id="menu"><div class="menu-heading"><h2>Special of The Month</h2></div><div class="menu-grid">${menuItems.map(MenuCard).join('')}</div><div class="menu-full"><a class="button menu-full__button" href="/menu/tripleegg-menu-august.pdf" target="_blank" rel="noopener noreferrer">VIEW FULL MENU</a></div></section>`; }
 
-function Location() { return `<section class="section location" id="location"><div class="section-kicker"><span>03</span><p>Come through</p></div><div class="location-grid"><div class="location-message"><h2>Psst....</h2><p>we're hatching something exciting soon</p><button class="text-link join-trigger" type="button">Join with us <span>↗</span></button></div><article class="location-card"><div class="pin" aria-hidden="true">●</div><p>Triple Egg</p><div class="location-photo-placeholder" role="img" aria-label="Location photo coming soon"></div><dl><div><dt>Address</dt><dd><a class="location-address" href="${location.mapUrl}" target="_blank" rel="noopener noreferrer">${location.address}</a></dd></div><div><dt>Opening Hours</dt><dd>${location.hours}</dd></div><div><dt>Contact</dt><dd><a class="location-address" href="${location.contactUrl}" target="_blank" rel="noopener noreferrer">${location.contact}</a></dd></div></dl></article></div></section>`; }
-
-function Contact() { return `<section class="contact" id="contact"><p class="eyebrow">Stay in the loop</p><h2>See what’s<br><em>cracking.</em></h2><p>Follow the official Triple Egg Instagram for current food, news, and updates.</p><a class="button button--dark" href="${instagram}" target="_blank" rel="noreferrer">@tripleeggfood <span>↗</span></a>${eggArt('egg-art--footer')}</section>`; }
+function Location() { return `<section class="section location" id="location"><div class="section-kicker"><span>03</span><p>Come through</p></div><div class="location-grid"><div class="location-message"><h2>Psst....</h2><p>we're hatching something exciting soon</p><div class="location-cta"><button class="text-link join-trigger" type="button">Get the first taste</button><span>at TripleEgg Tasting Night</span></div></div><article class="location-card"><div class="pin" aria-hidden="true">●</div><p>Triple Egg</p><div class="location-photo-placeholder" role="img" aria-label="Location photo coming soon"></div><dl><div><dt>Address</dt><dd><a class="location-address" href="${location.mapUrl}" target="_blank" rel="noopener noreferrer">${location.address}</a></dd></div><div><dt>Opening Hours</dt><dd>${location.hours}</dd></div><div><dt>Contact</dt><dd><a class="location-address" href="${location.contactUrl}" target="_blank" rel="noopener noreferrer">${location.contact}</a></dd></div></dl></article></div></section>`; }
 
 function Footer() { return `<footer>${Brand({light:true})}<div class="footer-nav">${nav.map(([l,h]) => `<a href="${h}">${l}</a>`).join('')}</div><div><a href="${instagram}" target="_blank" rel="noreferrer">Instagram ↗</a><p>© ${new Date().getFullYear()} Triple Egg</p></div></footer>`; }
 
@@ -76,7 +74,7 @@ function JoinDialog() { return `<dialog class="join-dialog" aria-labelledby="joi
   </div>
 </dialog>`; }
 
-document.querySelector('#app').innerHTML = `${Navbar()}<main>${Hero()}${Marquee()}${About()}${Menu()}${Location()}${Contact()}</main>${Footer()}${JoinDialog()}`;
+document.querySelector('#app').innerHTML = `${Navbar()}<main>${Hero()}${Marquee()}${About()}${Menu()}${Location()}</main>${Footer()}${JoinDialog()}`;
 
 const toggle = document.querySelector('.menu-toggle');
 const mobileMenu = document.querySelector('.mobile-nav');
