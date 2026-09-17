@@ -26,8 +26,8 @@ const eggArt = (className = '') => `<div class="egg-art ${className}" aria-hidde
 
 function Hero() {
   return `<section class="hero" id="home">
-    <div class="hero-copy reveal"><p class="eyebrow">Healthy food · Bali</p><h1>Good food.<br><em>Full strength.</em></h1>
-      <p class="hero-lede">Nutritious, delicious dishes for the way you want to live—made by Triple Egg inside OBSIDIAN Gym.</p>
+    <div class="hero-copy reveal"><p class="eyebrow">Healthy food · Bali</p><h1><span class="hero-heading__intro">Real Ingredients.<br>Honest Cooking.</span><em>Built for Strength.</em></h1>
+      <p class="hero-lede">Every dish is carefully sourced, cooked to order, and clearly labeled with macros, so you always know what you’re eating.</p>
       <div class="actions"><a class="button button--light" href="#menu">View menu <span>↓</span></a><a class="text-link" href="#location">Find us <span>↘</span></a><button class="text-link join-trigger" type="button">Join with us <span>↗</span></button></div>
     </div>
     <div class="hero-visual reveal">${eggArt()}<p class="stamp">TRIPLE<br>THE<br>GOOD</p></div>
