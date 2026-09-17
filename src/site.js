@@ -3,7 +3,7 @@ import { menuItems, location, claims } from './data.js';
 const instagram = 'https://www.instagram.com/tripleeggfood/';
 const nav = [
   ['Home', '#home'], ['About', '#about'], ['Menu', '#menu'],
-  ['Location', '#location'], ['Contact', '#contact'],
+  ['Location', '#location'],
 ];
 
 function Brand({ light = false } = {}) {
@@ -54,8 +54,6 @@ function Menu() { return `<section class="section menu-section" id="menu"><div c
 
 function Location() { return `<section class="section location" id="location"><div class="section-kicker"><span>03</span><p>Come through</p></div><div class="location-grid"><div class="location-message"><h2>Psst....</h2><p>we're hatching something exciting soon</p><button class="text-link join-trigger" type="button">Join with us <span>↗</span></button></div><article class="location-card"><div class="pin" aria-hidden="true">●</div><p>Triple Egg</p><div class="location-photo-placeholder" role="img" aria-label="Location photo coming soon"></div><dl><div><dt>Address</dt><dd><a class="location-address" href="${location.mapUrl}" target="_blank" rel="noopener noreferrer">${location.address}</a></dd></div><div><dt>Opening Hours</dt><dd>${location.hours}</dd></div><div><dt>Contact</dt><dd><a class="location-address" href="${location.contactUrl}" target="_blank" rel="noopener noreferrer">${location.contact}</a></dd></div></dl></article></div></section>`; }
 
-function Contact() { return `<section class="contact" id="contact"><p class="eyebrow">Stay in the loop</p><h2>See what’s<br><em>cracking.</em></h2><p>Follow the official Triple Egg Instagram for current food, news, and updates.</p><a class="button button--dark" href="${instagram}" target="_blank" rel="noreferrer">@tripleeggfood <span>↗</span></a>${eggArt('egg-art--footer')}</section>`; }
-
 function Footer() { return `<footer>${Brand({light:true})}<div class="footer-nav">${nav.map(([l,h]) => `<a href="${h}">${l}</a>`).join('')}</div><div><a href="${instagram}" target="_blank" rel="noreferrer">Instagram ↗</a><p>© ${new Date().getFullYear()} Triple Egg</p></div></footer>`; }
 
 function JoinDialog() { return `<dialog class="join-dialog" aria-labelledby="join-title">
@@ -76,7 +74,7 @@ function JoinDialog() { return `<dialog class="join-dialog" aria-labelledby="joi
   </div>
 </dialog>`; }
 
-document.querySelector('#app').innerHTML = `${Navbar()}<main>${Hero()}${Marquee()}${About()}${Menu()}${Location()}${Contact()}</main>${Footer()}${JoinDialog()}`;
+document.querySelector('#app').innerHTML = `${Navbar()}<main>${Hero()}${Marquee()}${About()}${Menu()}${Location()}</main>${Footer()}${JoinDialog()}`;
 
 const toggle = document.querySelector('.menu-toggle');
 const mobileMenu = document.querySelector('.mobile-nav');
