@@ -43,7 +43,13 @@ function About() {
   </section>`;
 }
 
-function MenuCard(item) { return `<article class="menu-card"><div class="menu-image"><span>${item.number}</span>${eggArt('egg-art--small')}</div><div class="menu-card-copy"><h3>${item.name}</h3>${item.description ? `<p class="menu-description">${item.description}</p>` : ''}<p class="menu-macros">${item.macros}</p></div></article>`; }
+const menuImages = [
+  '/sweet-potato-gnocchi.jpg',
+  '/marangi-chicken-skewer.jpg',
+  '/coco-matcha-cloud.jpg',
+];
+
+function MenuCard(item, index) { return `<article class="menu-card"><div class="menu-image"><span>${item.number}</span><img src="${menuImages[index]}" alt="${item.name}" loading="lazy"></div><div class="menu-card-copy"><h3>${item.name}</h3>${item.description ? `<p class="menu-description">${item.description}</p>` : ''}<p class="menu-macros">${item.macros}</p></div></article>`; }
 function Menu() { return `<section class="section menu-section" id="menu"><div class="menu-heading"><h2>Special of The Month</h2></div><div class="menu-grid">${menuItems.map(MenuCard).join('')}</div><div class="menu-full"><p>Explore our full menu, including dishes, drinks, pricing, and macronutrient information.</p><a class="button menu-full__button" href="/menu/tripleegg-menu-august.pdf" target="_blank" rel="noopener noreferrer">View full menu <span aria-hidden="true">↗</span></a></div></section>`; }
 
 function Location() { return `<section class="section location" id="location"><div class="section-kicker"><span>03</span><p>Come through</p></div><div class="location-grid"><div><h2>Find your<br>new routine.</h2><p class="large-copy">Fuel up before you train, refuel after, or just come hungry.</p></div><article class="location-card"><div class="pin" aria-hidden="true">●</div><p>Triple Egg</p><h3>${location.name}</h3><dl><div><dt>Area</dt><dd>${location.area}</dd></div><div><dt>Address</dt><dd>${location.address}</dd></div><div><dt>Hours</dt><dd>${location.hours}</dd></div></dl><p class="review-note">Map link will be added once the official address is confirmed.</p></article></div></section>`; }
