@@ -12,9 +12,15 @@ function Brand({ light = false } = {}) {
   </a>`;
 }
 
+function NavbarBrand() {
+  return `<a class="navbar-brand" href="#home" aria-label="Triple Egg home">
+    <img src="/tripleegg-logo.png" alt="Triple Egg">
+  </a>`;
+}
+
 function Navbar() {
   return `<header class="nav-shell"><nav class="navbar" aria-label="Main navigation">
-    ${Brand()}
+    ${NavbarBrand()}
     <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span></span><span></span></button>
     <div class="desktop-nav">${nav.map(([label, href]) => `<a href="${href}">${label}</a>`).join('')}</div>
     <a class="nav-social" href="${instagram}" target="_blank" rel="noreferrer">Instagram ↗</a>
