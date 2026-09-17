@@ -19,10 +19,9 @@ export const menuItems = [
 ];
 
 export const location = {
-  name: 'Inside OBSIDIAN Gym',
-  area: 'Bali, Indonesia',
-  address: '[REVIEW REQUIRED: confirm full street address]',
-  hours: '[REVIEW REQUIRED: confirm operating hours]',
+  address: 'Jl. Raya Canggu, Pererenan, Kec. Mengwi, Kabupaten Badung, Pererenan, Kec. Mengwi, Bali, 80351',
+  mapUrl: 'https://share.google/Uz556EJ59ImfDuSyp',
+  hours: '07.00 - 21.00',
 };
 
 export const claims = [
