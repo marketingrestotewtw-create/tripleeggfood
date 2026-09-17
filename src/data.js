@@ -21,7 +21,9 @@ export const menuItems = [
 export const location = {
   address: 'Jl. Raya Canggu, Pererenan, Kec. Mengwi, Kabupaten Badung, Pererenan, Kec. Mengwi, Bali, 80351',
   mapUrl: 'https://share.google/Uz556EJ59ImfDuSyp',
-  hours: '07.00 - 21.00',
+  hours: 'Mon - Sun 07.00 - 21.00',
+  contact: '+62 811-9698-8802',
+  contactUrl: 'https://wa.link/b1xf37',
 };
 
 export const claims = [
